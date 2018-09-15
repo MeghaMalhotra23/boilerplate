@@ -3,7 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input'
-import addTask from './action';
+import {addTask} from './action';
+import {deleteItem} from './action';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import {connect} from 'react-redux';
@@ -61,7 +62,7 @@ export class HomePage extends React.PureComponent {
         </Grid>
         <Grid item xs={4} margin="normal" >
         <Paper className={classes.paper}>
-      <Input placeholder="Enter task" id="task" type="text" ref={this.textInput} value={this.props.task} onChange={this.props.onChangeValue} />
+      <Input placeholder="Enter task" id="task" type="text"  value={this.props.task} onChange={this.props.onChangeValue} />
       </Paper>
       </Grid>
       <Grid item xs={1}>
@@ -71,10 +72,11 @@ export class HomePage extends React.PureComponent {
       </Grid>
       <div className={classes.block}>
       <List>
-     {this.props.statetask.map((ele)=>{
+     {this.props.statetask.map((ele,index)=>{
        return <ListItem key={ele}> 
          <CheckBox/>
        <ListItemText primary={ele}/>
+       <Button onClick={()=>this.props.deleteTask(index)}>X</Button>
         </ListItem>
      })}
          </List>
@@ -104,7 +106,8 @@ const mapStateToProps=createStructuredSelector({
         dispatch(addTask(evt))},
         addInList: ()=>{
           dispatch(addToList())
-        }
+        },
+        deleteTask:index=>{dispatch(deleteItem(index))}
  }
 }
 
