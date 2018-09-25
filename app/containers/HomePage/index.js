@@ -9,6 +9,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import {connect} from 'react-redux';
 import Button from '@material-ui/core/Button';
+import AppBar from '@material-ui/core/AppBar';
 import addToList from './action2';
 import reducer from './reducer';
 import { compose } from 'redux';
@@ -22,21 +23,45 @@ import CheckBox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
+import Toolbar from '@material-ui/core/Toolbar';
 
 /* eslint-disable react/prefer-stateless-function */
 const styles = theme=>({  
+  palette:{
+    type:'dark'
+  },
   root: {
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing.unit * 2,
+    padding:theme.spacing.unit * 2,
+    margin:theme.spacing.unit ,
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    display:'block'
+    display:'block',
+  },
+  inputBox:{
+    padding:theme.spacing.unit * 2,
+    margin:theme.spacing.unit ,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    display:'block',
+    width:400
   },
   block:{
     width:'100%',
     display:'block'
+  },
+  grow: {
+    flexGrow: 1
+  },
+  linkCss:{
+    backgroundColor: '#fff',
+    padding: theme.spacing.unit *2,
+    textDecoration: 'none',
+    paddingRight: 20,
+    borderRadius: 10,
+    paddingLeft:20
   }
 });
 export class HomePage extends React.PureComponent {
@@ -52,14 +77,19 @@ export class HomePage extends React.PureComponent {
     const {classes,themes}=this.props;
     return (
       <div className={classes.root}>
-      <Grid container spacing={24}>
-        <Grid item xs={12}>
-        <Paper className={classes.paper}>
-      <Typography variant="headline" color="primary" gutterBottom>
-        To Do List Application
-      </Typography>
-      </Paper>      
+      <Grid container spacing={20} alignItems="center" justify="center">
+        <Grid item xs={12} alignContent="space-around">
+       <AppBar position="static">
+       <Toolbar>
+       <Typography variant="title" color="inherit" className={classes.grow}>
+            To Do List
+          </Typography>
+       <Link to="/apicall" color="inherit" className={classes.linkCss}>API </Link>
+       </Toolbar> 
+      </AppBar>
         </Grid>
+        <Grid item xs={12} >
+        <Grid container justify="center">
         <Grid item xs={4} margin="normal" >
         <Paper className={classes.paper}>
       <Input placeholder="Enter task" id="task" type="text"  value={this.props.task} onChange={this.props.onChangeValue} />
@@ -67,25 +97,22 @@ export class HomePage extends React.PureComponent {
       </Grid>
       <Grid item xs={1}>
      <Paper className={classes.paper}>
-      <Button onClick={this.props.addInList}>ADD</Button>
+      <Button onClick={this.props.addInList} color="secondary">ADD</Button>
       </Paper>
       </Grid>
-      <div className={classes.block}>
+      </Grid>
+      </Grid>
+      <Grid item xs={4} >
       <List>
      {this.props.statetask.map((ele,index)=>{
        return <ListItem key={ele}> 
-         <CheckBox/>
+         <CheckBox color="primary"/>
        <ListItemText primary={ele}/>
        <Button onClick={()=>this.props.deleteTask(index)}>X</Button>
         </ListItem>
      })}
          </List>
-      </div>
-      <List>
-        <ListItem>
-        <Link to="/apicall">API </Link>
-        </ListItem>
-      </List>
+         </Grid>
       </Grid> 
     </div>
   
