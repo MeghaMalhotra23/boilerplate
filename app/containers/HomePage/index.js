@@ -40,18 +40,6 @@ const styles = theme=>({
     color: theme.palette.text.secondary,
     display:'block',
   },
-  inputBox:{
-    padding:theme.spacing.unit * 2,
-    margin:theme.spacing.unit ,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    display:'block',
-    width:400
-  },
-  block:{
-    width:'100%',
-    display:'block'
-  },
   grow: {
     flexGrow: 1
   },
@@ -77,8 +65,8 @@ export class HomePage extends React.PureComponent {
     const {classes,themes}=this.props;
     return (
       <div className={classes.root}>
-      <Grid container spacing={20} alignItems="center" justify="center">
-        <Grid item xs={12} alignContent="space-around">
+      <Grid container alignItems="center" justify="center">
+        <Grid item xs={12}>
        <AppBar position="static">
        <Toolbar>
        <Typography variant="title" color="inherit" className={classes.grow}>

@@ -30,10 +30,10 @@ const prettyHost = customHost || 'localhost';
 
 // Start your app.
 app.listen(port, host, async err => {
+  console.log("listening");
   if (err) {
     return logger.error(err.message);
   }
-
   // Connect to ngrok in dev mode
   if (ngrok) {
     let url;
